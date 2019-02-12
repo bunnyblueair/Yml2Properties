@@ -1,0 +1,33 @@
+plugins {
+    id 'application'
+    id 'java'
+}
+
+group 'io.bunnyblueair'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+jar {
+    manifest {
+
+        attributes(
+
+               // 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'io.bunnyblueair.Yaml2Prop'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.yaml', name: 'snakeyaml', version: '1.23'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+}
